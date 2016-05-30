@@ -1,7 +1,7 @@
 # alimq
 Golang 版 阿里云消息队列MQ SDK(http)
 
-`
+```golang
 package main
 
 import (
@@ -63,4 +63,4 @@ func Send() {
 	fmt.Println(messageId)
 	fmt.Println(err)
 }
-`
+```
