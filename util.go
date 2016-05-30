@@ -100,11 +100,11 @@ func HttpGet(urlStr string, header map[string]string) ([]byte, int, error) {
 	client := &http.Client{
 		Transport: &http.Transport{
 			Dial: func(netw, addr string) (net.Conn, error) {
-				conn, err := net.DialTimeout(netw, addr, time.Second*2)
+				conn, err := net.DialTimeout(netw, addr, time.Second*30)
 				if err != nil {
 					return nil, err
 				}
-				conn.SetDeadline(time.Now().Add(time.Second * 2))
+				conn.SetDeadline(time.Now().Add(time.Second * 30))
 				return conn, nil
 			},
 			ResponseHeaderTimeout: time.Second * 30,
