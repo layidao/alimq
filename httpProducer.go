@@ -5,7 +5,7 @@ import (
 	// "crypto/sha1"
 	"encoding/json"
 	"errors"
-	"fmt"
+	// "fmt"
 	"strconv"
 )
 
@@ -24,6 +24,7 @@ func (this *SendMessage) Send() (string, error) {
 
 	url := this.getPostUrl()
 	signStr := this.getSignStr()
+
 	sign := HamSha1(signStr, []byte(SECRET_KEY))
 
 	header := make(map[string]string)
@@ -31,9 +32,14 @@ func (this *SendMessage) Send() (string, error) {
 	header["Signature"] = sign
 	header["ProducerId"] = this.ProducerId
 
-	body, err := httpPost(url, header, []byte(this.Body))
+	body, status, err := httpPost(url, header, []byte(this.Body))
 	if err != nil {
 		return "", err
+	}
+
+	statusMessage := getStatusCodeMessage(status)
+	if statusMessage != "" {
+		return "", errors.New(statusMessage)
 	}
 
 	var rs interface{}
@@ -43,6 +49,7 @@ func (this *SendMessage) Send() (string, error) {
 	}
 
 	result := rs.(map[string]interface{})
+
 	sendStatus := result["sendStatus"].(string)
 	if sendStatus != "SEND_OK" {
 		return "", errors.New(sendStatus)
