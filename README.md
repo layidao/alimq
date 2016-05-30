@@ -20,6 +20,7 @@ func main() {
 
 }
 
+// 获取消息
 func List() {
 	t := GetCurrentTime() * 1000
 
@@ -36,6 +37,7 @@ func List() {
 			fmt.Println(k, " ---> ", v.Body)
 
 			if v.MsgHandle != "" {
+				// 删除消息
 				if done, err := messages.Delete(v.MsgHandle); done {
 					fmt.Println("删除成功")
 				} else {
@@ -47,6 +49,7 @@ func List() {
 	}
 }
 
+// 发送消息
 func Send() {
 	t := GetCurrentTime() * 1000
 
