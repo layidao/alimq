@@ -75,7 +75,7 @@ func httpPost(urlStr string, header map[string]string, body []byte) ([]byte, int
 		return []byte(""), 0, err
 	}
 
-	req.Header.Set("Content-Type", "text/html")
+	req.Header.Set("Content-Type", "text/html;charset=utf-8")
 	// req.Header.Set("Content-Type", "application/x-www-form-urlencoded; param=value")
 	for k, v := range header {
 		req.Header.Set(k, v)
@@ -112,7 +112,7 @@ func HttpGet(urlStr string, header map[string]string) ([]byte, int, error) {
 	}
 	req, _ := http.NewRequest("GET", urlStr, nil)
 
-	req.Header.Set("Content-Type", "text/html")
+	req.Header.Set("Content-Type", "text/html;charset=utf-8")
 	// req.Header.Set("Content-Type", "application/x-www-form-urlencoded; param=value")
 	for k, v := range header {
 		req.Header.Set(k, v)
@@ -150,7 +150,7 @@ func HttpDelete(urlStr string, header map[string]string) ([]byte, int, error) {
 	}
 	req, _ := http.NewRequest("DELETE", urlStr, nil)
 
-	req.Header.Set("Content-Type", "text/html")
+	req.Header.Set("Content-Type", "text/html;charset=utf-8")
 	// req.Header.Set("Content-Type", "application/x-www-form-urlencoded; param=value")
 	for k, v := range header {
 		req.Header.Set(k, v)
